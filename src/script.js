@@ -13,33 +13,21 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Objects
-const geometry = new THREE.SphereGeometry(15,32,16,0,6.283185307179586, 0, 1.5707964);
-geometry.parameters.thetaLength = 1.33831847042925
-console.log(geometry)
+const geometry =  new THREE.SphereGeometry( 15, 32, 16 );
 
 
-const topHalfMaterial = new THREE.MeshBasicMaterial()
-const bottomHalfMaterial = new THREE.MeshBasicMaterial()
-topHalfMaterial.color = new THREE.Color(0xE8E9E8)
-bottomHalfMaterial.color = new THREE.Color(0xB5B5B5)
+let material = new THREE.MeshBasicMaterial( { color: 0x000000} )
 
 // Mesh
-const topHalfSphere = new THREE.Mesh(geometry,topHalfMaterial)
-const bottomHalfSphere = new THREE.Mesh(geometry,bottomHalfMaterial)
-
-bottomHalfSphere.rotation.z =  Math.PI
-
-scene.add(topHalfSphere)
-scene.add(bottomHalfSphere)
-
-
+const sphere = new THREE.Mesh(geometry,material)
+scene.add(sphere)
 
 // Lights
 
 const pointLight = new THREE.PointLight(0xffffff, 1)
 pointLight.position.x = 2
 pointLight.position.y = 3
-pointLight.position.z = 69
+pointLight.position.z = 20
 scene.add(pointLight)
 
 /**
@@ -72,7 +60,7 @@ window.addEventListener('resize', () =>
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 0
 camera.position.y = 0
-camera.position.z = 40
+camera.position.z = 50
 scene.add(camera)
 
 // Controls
