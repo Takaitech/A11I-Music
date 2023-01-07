@@ -6,6 +6,12 @@ import * as dat from 'dat.gui'
 // Debug
 const gui = new dat.GUI()
 
+// Loader 
+const loader = new THREE.TextureLoader();
+loader.load('/textures/test-bg-image.jpg' , function(texture)
+            {
+             scene.background = texture;  
+            });
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -13,13 +19,16 @@ const canvas = document.querySelector('canvas.webgl')
 const scene = new THREE.Scene()
 
 // Objects
-const geometry =  new THREE.SphereGeometry( 15, 32, 16 );
+const geometry =  new THREE.SphereGeometry( 18, 32, 16 );
 
+//Texture
+const texture = loader.load( '/textures/sphere-test-texture.png' );
+let material = new THREE.MeshBasicMaterial( { map: texture,  transparent: true } )
 
-let material = new THREE.MeshBasicMaterial( { color: 0x000000} )
 
 // Mesh
 const sphere = new THREE.Mesh(geometry,material)
+sphere.rotation.x = 4.7
 scene.add(sphere)
 
 // Lights
@@ -30,6 +39,9 @@ pointLight.position.y = 3
 pointLight.position.z = 20
 scene.add(pointLight)
 
+const sphereFolder = gui.addFolder('Sphere')
+sphereFolder.add(sphere.rotation, 'x', 0, Math.PI * 2)
+
 /**
  * Sizes
  */
@@ -37,6 +49,7 @@ const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
 }
+
 
 window.addEventListener('resize', () =>
 {
@@ -75,7 +88,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor( 0xffffff, 1 );
+renderer.setClearColor( 0x000000, 1 );
 
 /**
  * Animate
