@@ -30,6 +30,8 @@ const torusGeometryLeft = new THREE.TorusGeometry( 10, .034, 30, 200, 1.50994943
 const torusCircleGeometry = new THREE.TorusGeometry( .6, .034, 30, 200 );
 
 const planeGeometry = new THREE.PlaneGeometry( 200, 100 );
+const planeGeometry = new THREE.PlaneGeometry( 200, 100 );
+
 
 
 // A11I Font
